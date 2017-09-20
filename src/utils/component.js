@@ -53,7 +53,9 @@ class Framework7Component {
 
     // Render template
     let html = '';
-    if (component.render) {
+    if (component.html) {
+      html = component.html;
+    } else if (component.render) {
       html = component.render();
     } else if (component.template) {
       if (typeof component.template === 'string') {

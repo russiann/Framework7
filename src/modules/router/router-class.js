@@ -739,7 +739,13 @@ class Router extends Framework7Class {
       });
       resolve(createdComponent.el, { pageEvents: createdComponent.on });
     }
-    if (url) {
+
+    if (component.renderAsyncDOM) {
+      // Load async created dom
+      component.renderAsyncDOM((html) => {
+        compile(Utils.extend(component, { html }));
+      });
+    } else if (url) {
       // Load via XHR
       if (router.xhr) {
         router.xhr.abort();
